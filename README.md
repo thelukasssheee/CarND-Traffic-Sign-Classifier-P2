@@ -1,8 +1,6 @@
 # Project: Build a Traffic Sign Recognition Program 
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
-
 ## Writeup from Michael Berner
-
 ### Student of Udacity Self-Driving Car NanoDegree 2018
 
 [//]: # (Image References)
