@@ -9,7 +9,7 @@
 [image1b]: ./images_out/dataset_example_images_1-train.jpg "Visualization of exemplary images TRAINING DS"
 [image1c]: ./images_out/dataset_example_images_2-valid.jpg "Visualization of exemplary images TRAINING DS"
 [image1d]: ./images_out/dataset_example_images_3-test.jpg "Visualization of exemplary images TRAINING DS"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
+[image2]: ./images_out/dataset_grayscale_conversion.jpg "Grayscaling"
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./examples/placeholder.png "Traffic Sign 1"
 [image5]: ./examples/placeholder.png "Traffic Sign 2"
@@ -39,17 +39,15 @@ This readme will cover all of the [rubric points](https://review.udacity.com/#!/
 ---
 ##  I - Writeup / README
 
-This is the README to my project. I decided to put my write up notes directly into this file. This makes accessing, understanding and using my program much easier. 
+This is the README to my project. I decided to put my write up notes directly into this file, which makes accessing, understanding and using my program much easier. 
 
 For the sake of completeness, I retained a copy of the original README file within this repository under the name [README_Udacity](https://github.com/thelukasssheee/CarND-Traffic-Sign-Classifier-Project/blob/master/README_Udacity.md).  
 
-Here is the link to my [project code on GitHub](https://github.com/thelukasssheee/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
-
-Further information can be found in the complete [GitHub repository](https://github.com/thelukasssheee/CarND-Traffic-Sign-Classifier-Project/)
+Here is the link to my code as a [Jupyter Notebook](https://github.com/thelukasssheee/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb). More files and the entire repository can be found on [GitHub](https://github.com/thelukasssheee/CarND-Traffic-Sign-Classifier-Project/)
 
 The entire program code is held within a Jupyter notebook and is written in Python 3.5.2.final.0.
 
-Some libraries are necessary to run the code and should be installed before running the notebook:
+Some libraries are necessary to run the code and should be installed before running the notebook. The versions which I used during development are added below. This doesn't mean, that you need to downgrade or specifically install this version. If something isn't running though, they might be helpful:
 
 * pickleshare 0.7.3
 * numpy 1.12.1
@@ -100,19 +98,21 @@ Some example images from all three datasets are shown below. It can be clearly s
 
 ## III - Design and Test a Model Architecture
 
-### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
+### 1. Image preprocessing
 
-As a first step, I decided to convert the images to grayscale because ...
+*Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)*
 
-Here is an example of a traffic sign image before and after grayscaling.
+In the final version, I have applied two major steps. 
 
-![alt text][image2]
+At first, the image is **converted from RGB information to grayscale**, as can be seen below.
 
-As a last step, I normalized the image data because ...
+![Conversion to grayscale][image2]
 
-I decided to generate additional data because ... 
+As it turned out, the greatest benefit of using grayscale images was calculation performance. There was also a positive effect on model's accuracy, but it was very small. The speed increase was tremendous, allowing much more iterations for parameter optimization! 
 
-To add more data to the the data set, I used the following techniques because ... 
+
+The second step was **normalization**: the rgb/grayscale information was changed from `[0 ... 255]` to a range of `[-1.0 ... 1.0]`. This step had a huge impact on the neural networks accuracy, immediately improving the accuracy by 7%.  
+
 
 Here is an example of an original image and an augmented image:
 
@@ -121,59 +121,65 @@ Here is an example of an original image and an augmented image:
 The difference between the original data set and the augmented data set is the following ... 
 
 
-### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
+### 2. Model architecture
+*Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.*
 
 My final model consisted of the following layers:
 
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
- 
+| Layer         			|     Description	        					| 
+|:-------------------------:|:---------------------------------------------:| 
+| Input         			| 32x32x1 Grayscale image 						| 
+| Convolution layer 1 		| 1x1 stride, valid padding, outputs 28x28x6 	|
+| RELU						|												|
+| Max pooling 2x2      		| 2x2 stride, outputs 14x14x6 					|
+| Convolution layer 2   	| 1x1 stride, valid padding, outputs 10x10x16	|
+| RELU						|												|
+| Max pooling 2x2			| 2x2 stride, outputs 5x5x16					|
+| Flatten					| Output 400									|
+| Fully connected layer 3	| Output 512									|
+| RELU & Dropout			| Keep probability 0.5							|
+| Fully connected layer 4	| Size kept, output 512							|
+| RELU & Dropout			| Keep probability 0.5							|
+| Fully connected layer 5	| Connect to 43 logits							|
 
 
-### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
+### 3. Model training
+*Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.*
 
-To train the model, I used an ....
+To train the model, I started off playing around with hyper parameters. I found that the initial parameters from the LeNet neural network vom LeCunn was performing well:
 
-### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
+| Parameters       			|     Value			        					| 
+|:-------------------------:|:---------------------------------------------:| 
+| Start values     			| Truncated normal, mu = 0, sigma = 0.1, b = 0.0| 
+| Learning rate		 		| 0.001 										|
+| Epochs					| 30											|
+| Batch size				| 128
 
+During the optimization, I also stayed with the AdamOptimizer since it was doing great with the dropouts I implemented. 
 
+### 4. Necessary steps to achieve required accuracy of >0.93
+*Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.* 
 
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+* training set accuracy of **99.9%**
+* validation set accuracy of **95.6%** 
+* test set accuracy of **94.9%**
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
- 
+I started within this project with the LeNet architecture, which was available from the previous labs and lessons. There was a paper indicating, that LeNet architecture works fine on traffic sign recognition, therefore making it a good starting point. As it turned out, I was able to confirm this: the model was computing fast and achieved an accuracy > 0.8. However, not sufficient to achieve the required accuracy of 0.93.
+
+In the next step, I worked on the hyper parameters to see, how much the model can be tweaked. Unfortunately, the additional training effort was mostly going in to over fitting the model, not significantly improving the the test set accuracy.
+
+Therefore I decided to include dropouts into the neural network. This was, at first, reducing accuracy due to the small layer sizes of the LeNet architecture. I figured, that I probably had to make the network deeper by increasing the size of the fully connected layers and added an additional fully connected layer to the network. This helped a lot to boost accuracy.  
+
 Below you can see, how the major code changes affected to neural networks accuracy:
 
-| Accuracy         		| Prediction	        						| 
-|:---------------------:|:---------------------------------------------:| 
-| 89.3%       			| Base-model LeNet, direct adaption				| 
-| .20     				| asdf											|
-| .05					| asdf											|
-| .04	      			| asdf					 						|
-| .01				    | asdf     										| 
+| Accuracy         		| Prediction	        								| 
+|:---------------------:|:-----------------------------------------------------:| 
+| 87.3%       			| v0: LeNet, direct adaption to RGB						| 
+| 94.4%    				| v1: as previous, but 512x512 layer 4 & dropout 0.5	|
+| 94.9%					| v2: as previous, but changed to grayscale				|
+
 
 
 ## Test a Model on New Images
