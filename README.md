@@ -18,6 +18,8 @@
 [image8]: ./additional_signs_original/v60_1.jpg "Speed limit 60, label 3"
 [image9]: ./additional_signs_original/v80_1.jpg "Speed limit 80, label 5"
 [image10]: ./additional_signs_original/vorfahrt_1.jpg "Yield, label 13"
+[image11]: ./images_out/own_images_from_internet.jpg "Own images cropped and resized"
+[image12]: ./images_out/own_images_from_internet_detected.jpg "Own images, detection quality"
 
 ---
 
@@ -176,53 +178,56 @@ Below you can see, how the major code changes affected to neural networks accura
 | 94.4%    				| v1: as previous, but 512x512 layer 4 & dropout 0.5	|
 | 94.6%					| v2: as previous, but changed to grayscale				|
 
+The final accuracy was sufficient and I was surprised by the result. Unfortunately, I was running out of time to further tweak the code.
 
+---
 
-## Test a Model on New Images
+## VI - Test a Model on New Images
 
-### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
+### 1. Identify further German traffic signs found on the web
+*Choose further German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.*
 
-Here are five German traffic signs that I found on the web:
+I looked up several signs on the internet and came up with the following selection. The idea behind it was to start with very simple, basic signs. Other images have a different background, have stickers on them, are tilted or are somewhat damaged. 
 
 ![alt text][image4] ![alt text][image5] ![alt text][image6] 
 ![alt text][image7] ![alt text][image8] ![alt text][image9]
 ![alt text][image10]
  
-The first image might be difficult to classify because ...
+The images needed to be cropped and downsized for the neural network to be able to process them. After these steps, the images looked like this:
 
-### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
+![alt text][image11]
 
-Here are the results of the prediction:
+### 2. Overall prediction quality of further traffic signs
+*Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).*
 
-| Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+The overall results were surprisingly bad. Here are the results of the prediction:
 
+The model was able to correctly guess 3 of the 7 traffic signs, which gives an accuracy of only 43%.
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+What was possibly going on is explained in more detail in the next section.
 
-### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
+### 3. Prediction for individual traffic signs (optional)
+*Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)*
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+| Image			        |     Comment	    	    	 |	Prediction		|  Discussion																|
+|:---------------------:|:------------------------------:|:----------------:|:-------------------------------------------------------------------------:| 
+| Stop Sign 1     		| Very clear picture (large)	 |	0.01			| Image probably too large, relevant areas on borders were not identified	 |
+| Stop Sign 2  			| Distorted view				 |	0.57			| Image heavily skewed, but successfully detected							|
+| Stop Sign 3			| Stickers on sign				 |	0.00			| Not detected at all!! Was NN fooled by stickers on sign?					|
+| 30 km/h	      		| Speed sign (forest)			 |	1.00			| Clearly detected.															|
+| 60 km/h				| Speed sign (urban)   			 |	0.00			| Not detected at all, although clearly visible! Too large?				  |
+| 80 km/h				| Speed sign (forest) 			 |	0.01			| Not detected at all. Too large?											|
+| Yield					| Yield sign (damaged) 			 |	1.00			| Clearly detected.															|
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+![alt text][image12]
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+My guess is, that the images relevant features were too close to the borders, which means too large. In the training dataset, traffic signs account for 1/2 to 2/3 of the image size (32x32px). In the case of my pictures, they were filling 3/4 or even the full dimension of the 32px. 
 
-
-For the second image ... 
+Any feedback on this would be highly appreciated. 
 
 ## (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 ### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
+Unfortunately, I was running out time and could not finish the second optional task. 
 
+However, the project was again a lot of fun! Thanks Udacity for this great experience!
