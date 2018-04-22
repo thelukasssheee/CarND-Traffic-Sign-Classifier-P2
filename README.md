@@ -53,6 +53,7 @@ Some libraries are necessary to run the code and should be installed before runn
 * numpy 1.12.1
 * matplotlib 2.0.0
 * tensorflow 0.12.1
+* opencv-python 3.4.0.12
 
 ---
 
