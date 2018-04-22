@@ -200,9 +200,7 @@ The images needed to be cropped and downsized for the neural network to be able 
 ### 2. Overall prediction quality of further traffic signs
 *Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).*
 
-The overall results were surprisingly bad. Here are the results of the prediction:
-
-The model was able to correctly guess 3 of the 7 traffic signs, which gives an accuracy of only 43%.
+The overall results were surprisingly bad! The model was able to correctly guess 3 of the 7 traffic signs, which gives an accuracy of only 43%.
 
 What was possibly going on is explained in more detail in the next section.
 
@@ -221,9 +219,8 @@ What was possibly going on is explained in more detail in the next section.
 
 ![alt text][image12]
 
-My guess is, that the images relevant features were too close to the borders, which means too large. In the training dataset, traffic signs account for 1/2 to 2/3 of the image size (32x32px). In the case of my pictures, they were filling 3/4 or even the full dimension of the 32px. 
+My guess is, that the relevant features of the image files were too close to the borders - the traffic signs were too large. In the training dataset, traffic signs account for 1/2 to 2/3 of the image size (32x32px). In the case of my pictures, they were filling 3/4 or even the full dimension of the 32px. What is pointing me towards this direction is that the 30km/h speed sign was properly detected, whereas the other speed signs were not. Even the tilted / skewed stop sign was detected, but the very clearly visible first stop sign was not.
 
-Any feedback on this would be highly appreciated. 
 
 ## (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 ### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
