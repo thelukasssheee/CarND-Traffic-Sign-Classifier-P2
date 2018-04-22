@@ -83,7 +83,7 @@ I was particularly interested in two things:
   
 As can be seen in the two bar charts, all traffic signs are included in all three datasets. This is good.
 
-However, some traffic signs are represented significantly more often than others. This could lead to problems in the learning algorithm in such a way that it is overtrained for some traffic signs, but not trained enough for other. This might be one potential target for further optimization. 
+However, some traffic signs are represented significantly more often than others. This could lead to problems in the learning algorithm in such a way that it is overtrained for some traffic signs, but not trained enough for other. This might be one potential target for further optimizations. 
 
 ![Distribution of labels within provided image datasets][image1a]
 
@@ -123,18 +123,18 @@ My final model consisted of the following layers:
 | Layer         			|     Description	        					| 
 |:-------------------------:|:---------------------------------------------:| 
 | Input         			| 32x32x1 Grayscale image 						| 
-| Convolution layer 1 		| 1x1 stride, valid padding, outputs 28x28x6 	|
+| Convolution 5x5, layer 1  | 1x1 stride, valid padding, outputs 28x28x6 	|
 | RELU						|												|
-| Max pooling 2x2      		| 2x2 stride, outputs 14x14x6 					|
-| Convolution layer 2   	| 1x1 stride, valid padding, outputs 10x10x16	|
+| 2x2 Max pooling      		| 2x2 stride, outputs 14x14x6 					|
+| Convolution 5x5, layer 2  | 1x1 stride, valid padding, outputs 10x10x16	|
 | RELU						|												|
 | Max pooling 2x2			| 2x2 stride, outputs 5x5x16					|
 | Flatten					| Output 400									|
-| Fully connected layer 3	| Output 512									|
+| Fully connected, layer 3	| 400x512										|
 | RELU & Dropout			| Keep probability 0.5							|
-| Fully connected layer 4	| Size kept, output 512							|
+| Fully connected, layer 4	| 512x512										|
 | RELU & Dropout			| Keep probability 0.5							|
-| Fully connected layer 5	| Connect to 43 logits							|
+| Fully connected, layer 5	| 512x43, 43 logits								|
 
 
 ### 3. Model training
@@ -157,8 +157,8 @@ During the optimization, I also stayed with the AdamOptimizer since it was doing
 My final model results were:
 
 * training set accuracy of 99.9%
-* validation set accuracy of 95.6% 
-* **test set accuracy of 94.9%**
+* validation set accuracy of 96.5% 
+* **test set accuracy of 94.6%**
 
 I started within this project with the LeNet architecture, which was available from the previous labs and lessons. There was a paper indicating, that LeNet architecture works fine on traffic sign recognition, therefore making it a good starting point. As it turned out, I was able to confirm this: the model was computing fast and achieved an accuracy > 0.8. However, not sufficient to achieve the required accuracy of 0.93.
 
@@ -172,7 +172,7 @@ Below you can see, how the major code changes affected to neural networks accura
 |:---------------------:|:-----------------------------------------------------:| 
 | 87.3%       			| v0: LeNet, direct adaption to RGB						| 
 | 94.4%    				| v1: as previous, but 512x512 layer 4 & dropout 0.5	|
-| 94.9%					| v2: as previous, but changed to grayscale				|
+| 94.6%					| v2: as previous, but changed to grayscale				|
 
 
 
