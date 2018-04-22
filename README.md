@@ -129,7 +129,7 @@ My final model consisted of the following layers:
 | Input         			| 32x32x1 Grayscale image 						| 
 | Convolution 5x5, layer 1  | 1x1 stride, valid padding, outputs 28x28x6 	|
 | RELU						|												|
-| 2x2 Max pooling      		| 2x2 stride, outputs 14x14x6 					|
+| Max pooling 2x2      		| 2x2 stride, outputs 14x14x6 					|
 | Convolution 5x5, layer 2  | 1x1 stride, valid padding, outputs 10x10x16	|
 | RELU						|												|
 | Max pooling 2x2			| 2x2 stride, outputs 5x5x16					|
@@ -144,7 +144,7 @@ My final model consisted of the following layers:
 ### 3. Model training
 *Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.*
 
-To train the model, I started off playing around with hyper parameters. I found that the initial parameters from the LeNet neural network vom LeCunn was performing well:
+To train the model, I started off playing around with hyper parameters. I found that the initial parameters from the LeNet neural network of LeCunn et. al. were performing well:
 
 | Parameters       			|     Value			        					| 
 |:-------------------------:|:---------------------------------------------:| 
@@ -164,11 +164,11 @@ My final model results were:
 * validation set accuracy of 96.5% 
 * **test set accuracy of 94.6%**
 
-I started within this project with the LeNet architecture, which was available from the previous labs and lessons. There was a paper indicating, that LeNet architecture works fine on traffic sign recognition, therefore making it a good starting point. As it turned out, I was able to confirm this: the model was computing fast and achieved an accuracy > 0.8. However, not sufficient to achieve the required accuracy of 0.93.
+I started within this project with the LeNet architecture, which was available from the previous labs and lessons. There was a paper indicating, that LeNet architecture works fine on traffic sign recognition, therefore making it a good starting point. As it turned out, I was able to confirm this: the model was computing fast and achieved an accuracy > 0.8. However, not yet sufficient to achieve the required accuracy of 0.93.
 
-In the next step, I worked on the hyper parameters to see, how much the model can be tweaked. Unfortunately, the additional training effort was mostly going in to over fitting the model, not significantly improving the the test set accuracy.
+In the next step, I worked on the hyper parameters in order to see, how much the model can be tweaked. Unfortunately, the additional training effort was mostly going in to over fitting the model, not significantly improving the test set accuracy.
 
-Therefore I decided to include dropouts into the neural network. This was, at first, reducing accuracy due to the small layer sizes of the LeNet architecture. I figured, that I probably had to make the network deeper by increasing the size of the fully connected layers and added an additional fully connected layer to the network. This helped a lot to boost accuracy.  
+Therefore, I decided to include dropouts into the neural network. This was, at first, reducing accuracy due to the small layer sizes of the LeNet architecture. I figured, that I have to make the network deeper by increasing the size of the fully connected layers and added an additional fully connected layer to the network. This helped a lot to boost accuracy.  
 
 Below you can see, how the major code changes affected to neural networks accuracy:
 
@@ -200,7 +200,7 @@ The images needed to be cropped and downsized for the neural network to be able 
 ### 2. Overall prediction quality of further traffic signs
 *Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).*
 
-The overall results were surprisingly bad! The model was able to correctly guess 3 of the 7 traffic signs, which gives an accuracy of only 43%.
+The overall results were surprisingly bad! The model was able to correctly guess only 3 of the 7 traffic signs, which gives an accuracy of only 43%.
 
 What was possibly going on is explained in more detail in the next section.
 
