@@ -114,13 +114,6 @@ As it turned out, the greatest benefit of using grayscale images was calculation
 The second step was **normalization**: the rgb/grayscale information was changed from `[0 ... 255]` to a range of `[-1.0 ... 1.0]`. This step had a huge impact on the neural networks accuracy, immediately improving the accuracy by 7%.  
 
 
-Here is an example of an original image and an augmented image:
-
-![alt text][image3]
-
-The difference between the original data set and the augmented data set is the following ... 
-
-
 ### 2. Model architecture
 *Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.*
 
