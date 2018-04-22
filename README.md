@@ -162,9 +162,9 @@ During the optimization, I also stayed with the AdamOptimizer since it was doing
 
 My final model results were:
 
-* training set accuracy of **99.9%**
-* validation set accuracy of **95.6%** 
-* test set accuracy of **94.9%**
+* training set accuracy of 99.9%
+* validation set accuracy of 95.6% 
+* **test set accuracy of 94.9%**
 
 I started within this project with the LeNet architecture, which was available from the previous labs and lessons. There was a paper indicating, that LeNet architecture works fine on traffic sign recognition, therefore making it a good starting point. As it turned out, I was able to confirm this: the model was computing fast and achieved an accuracy > 0.8. However, not sufficient to achieve the required accuracy of 0.93.
 
