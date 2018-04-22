@@ -11,11 +11,13 @@
 [image1d]: ./images_out/dataset_example_images_3-test.jpg "Visualization of exemplary images TRAINING DS"
 [image2]: ./images_out/dataset_grayscale_conversion.jpg "Grayscaling"
 [image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[image4]: ./additional_signs_original/stop_1.jpg "Stop sign 1, label 14"
+[image5]: ./additional_signs_original/stop_2.jpg "Stop sign 2, label 14"
+[image6]: ./additional_signs_original/stop_3.jpg "Stop sign 3, label 14"
+[image7]: ./additional_signs_original/v30_1.jpg "Speed limit 30, label 1"
+[image8]: ./additional_signs_original/v60_1.jpg "Speed limit 60, label 3"
+[image9]: ./additional_signs_original/v80_1.jpg "Speed limit 80, label 5"
+[image10]: ./additional_signs_original/vorfahrt_1.jpg "Yield, label 13"
 
 ---
 
@@ -183,8 +185,9 @@ Below you can see, how the major code changes affected to neural networks accura
 Here are five German traffic signs that I found on the web:
 
 ![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
-
+![alt text][image7] ![alt text][image8] ![alt text][image9]
+![alt text][image10]
+ 
 The first image might be difficult to classify because ...
 
 ### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
