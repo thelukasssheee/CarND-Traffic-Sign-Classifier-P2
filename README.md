@@ -208,25 +208,28 @@ What was possibly going on is explained in more detail in the next section.
 ### 3. Prediction for individual traffic signs (optional)
 *Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)*
 
-#### First attempts
+I picked several images from the internet, where I believed they would pose some sort of challenge to the neural network. 
 
-| Image			        |     Comment	    	    	 |	Prediction		|  Discussion																|
+The two stop signs I believed were a little more challenging to detect. One of the stop signs is shown considerably distored, the other one has an additional sticker on it. It turned out, that the algorithm was not able to detect the stop signs. For the stop sign with the sticker on it, the neural network did not even propose a stop sign within the top 5 candidates! 
+
+The next images were three different speed signs. 
+
+* The 30km/h sign had an additional traffic sign mounted below itself, which might be a little challenging. However, this sign was detected just fine.
+* A 60km/h sign was chosen as a very simple candidate with a clear picture and photographed from in front. Surprisingly, the algorithm did not detect this one!
+* 80km/h sign was cropped in such a way, that the image was almost filled by the traffic sign. It was clearly detected, probably, because there were still borders of 2 pixels or more around the traffic sign. During the first 5x5 convolution, there is enough information left to detect the traffic sign adequately. 
+
+As a last image, a yield sign was chosen. The yield sign was damaged in the top left corner and I thought this could fool the traffic sign classifier. The opposite was the case: 1.00 prediction for a yield sign, therefore perfect match. 
+
+Below, the results are summarized in a table. Overall, a matching rate of 50% could be achieved. 
+
+| Image			        |     Challenge/Attribute   	 |	Prediction		|  Discussion																|
 |:---------------------:|:------------------------------:|:----------------:|:-------------------------------------------------------------------------:| 
-| Stop Sign 1     		| Very clear picture (large)	 |	0.01			| Image probably too large, relevant areas on borders were not identified	 |
-| Stop Sign 2  			| Distorted view				 |	0.57			| Image heavily skewed, but successfully detected							|
-| Stop Sign 3			| Stickers on sign				 |	0.00			| Not detected at all!! Was NN fooled by stickers on sign?					|
-| 30 km/h	      		| Speed sign (forest)			 |	1.00			| Clearly detected.															|
-| 60 km/h				| Speed sign (urban)   			 |	0.00			| Not detected at all, although clearly visible! Too large?				  |
-| 80 km/h				| Speed sign (forest) 			 |	0.01			| Not detected at all. Too large?											|
+| Stop Sign 2  			| Distorted view				 |	0.00			| Image heavily skewed, sign was not detected 								|
+| Stop Sign 3			| Stickers on sign				 |	N/A (0.00)		| Not detected at all, not even proposed! NN fooled by stickers on sign 	 |
+| 30 km/h	      		| Additional sign mounted below	 |	1.00			| Clearly detected.															|
+| 60 km/h				| No challenge: clearly visible	 |	0.00			| Not detected at all, although clearly visible and not too large!          |
+| 80 km/h				| Speed sign (forest) 			 |	0.83			| Clearly detected. 														|
 | Yield					| Yield sign (damaged) 			 |	1.00			| Clearly detected.															|
-
-![alt text][image12]
-
-My guess is, that the relevant features of the image files were too close to the borders - the traffic signs were too large. In the training dataset, traffic signs account for 1/2 to 2/3 of the image size (32x32px). In the case of my pictures, they were filling 3/4 or even the full dimension of the 32px. What is pointing me towards this direction is that the 30km/h speed sign was properly detected, whereas the other speed signs were not. Even the tilted / skewed stop sign was detected, but the very clearly visible first stop sign was not.
-
-#### Final attempt
-
-The images were cropped freshly to have a larger border. 
 
 ![alt text][image13]
 
