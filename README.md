@@ -19,7 +19,8 @@
 [image9]: ./additional_signs_original/v80_1.jpg "Speed limit 80, label 5"
 [image10]: ./additional_signs_original/vorfahrt_1.jpg "Yield, label 13"
 [image11]: ./images_out/own_images_from_internet.jpg "Own images cropped and resized"
-[image12]: ./images_out/own_images_from_internet_detected.jpg "Own images, detection quality"
+[image12]: ./images_out/own_images_from_internet_detected_too_large.jpg "Own images, detection quality, first attemp"
+[image13]: ./images_out/own_images_from_internet_detected.jpg "Own images, detection quality, final attempt"
 
 ---
 
@@ -207,6 +208,8 @@ What was possibly going on is explained in more detail in the next section.
 ### 3. Prediction for individual traffic signs (optional)
 *Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)*
 
+#### First attempts
+
 | Image			        |     Comment	    	    	 |	Prediction		|  Discussion																|
 |:---------------------:|:------------------------------:|:----------------:|:-------------------------------------------------------------------------:| 
 | Stop Sign 1     		| Very clear picture (large)	 |	0.01			| Image probably too large, relevant areas on borders were not identified	 |
@@ -220,6 +223,13 @@ What was possibly going on is explained in more detail in the next section.
 ![alt text][image12]
 
 My guess is, that the relevant features of the image files were too close to the borders - the traffic signs were too large. In the training dataset, traffic signs account for 1/2 to 2/3 of the image size (32x32px). In the case of my pictures, they were filling 3/4 or even the full dimension of the 32px. What is pointing me towards this direction is that the 30km/h speed sign was properly detected, whereas the other speed signs were not. Even the tilted / skewed stop sign was detected, but the very clearly visible first stop sign was not.
+
+#### Final attempt
+
+The images were cropped freshly to have a larger border. 
+
+![alt text][image13]
+
 
 
 ## (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
