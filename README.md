@@ -196,7 +196,10 @@ The images needed to be cropped and downsized for the neural network to be able 
 
 ![alt text][image11]
 
-The two stop signs with different features were chosen. One of the stop signs is shown considerably distored, the other one has an additional sticker on it, introducing new (wrong) information compared to the previously trained images. It turned out, that the algorithm was not able to detect the challenging stop signs. For the stop sign with the sticker on it, the neural network did not even propose a stop sign within the top 5 candidates! 
+Two stop signs with different features were chosen. 
+
+* One of the stop signs is shown considerably distored, which was new compared to the previously trained images. The traffic sign was not detected properly.
+* The other stop sign has an additional sticker on it, introducing new (wrong) information compared to the previously trained images. It turned out, that this stop signs with sticker on it was especially challenging: the neural network did not even propose a stop sign within the top 5 candidates! 
 
 The next images were three different speed signs. 
 
@@ -222,8 +225,8 @@ Below, the results are summarized in a table. Overall, a matching rate of 50% co
 
 | Image			        |     Challenge/Attribute   	 |	Prediction		|  Discussion																|
 |:---------------------:|:------------------------------:|:----------------:|:-------------------------------------------------------------------------:| 
-| Stop Sign 2  			| Distorted view				 |	0.00			| Image heavily skewed, sign was not detected 								|
-| Stop Sign 3			| Stickers on sign				 |	N/A (0.00)		| Not detected at all, not even proposed! NN fooled by stickers on sign 	 |
+| Stop Sign  			| Distorted view				 |	0.00			| Image heavily skewed, sign was not detected 								|
+| Stop Sign				| Stickers on sign				 |	N/A (0.00)		| Not detected at all, not even proposed! NN fooled by stickers on sign 	 |
 | 30 km/h	      		| Additional sign mounted below	 |	1.00			| Clearly detected.															|
 | 60 km/h				| No challenge: clearly visible	 |	0.00			| Not detected at all, although clearly visible and not too large!          |
 | 80 km/h				| Speed sign (forest) 			 |	0.83			| Clearly detected. 														|
