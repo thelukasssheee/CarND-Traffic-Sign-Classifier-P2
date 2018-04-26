@@ -238,7 +238,9 @@ I visualized the top 5 candidates which were picked by the traffic sign classifi
 
 ![alt text][image13]
 
-
+### 4. Possible improvements
+* More images or simply creating augmented duplicates of the provided dataset (different lighting, shifted, turned, skewed...) would have helped to detect the distorted stop sign
+* Underrepresented images could be better detected, if even more augmented duplicates would be added. This would help to distribute the images more evenly in the histrogram. (The label class of the not properly detected stop signs only had a third of the amount of training images compared to the largest datasets).
 
 ## (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 ### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
