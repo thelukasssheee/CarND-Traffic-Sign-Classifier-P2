@@ -188,37 +188,35 @@ The final accuracy was sufficient and I was surprised by the result. Unfortunate
 ### 1. Identify further German traffic signs found on the web
 *Choose further German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.*
 
-I looked up several signs on the internet and came up with the following selection. The idea behind it was to start with very simple, basic signs. Other images have a different background, have stickers on them, are tilted or are somewhat damaged. 
+I picked several images from the internet, where I believed they would pose some sort of challenge to the neural network. 
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8] ![alt text][image9]
-![alt text][image10]
+![alt text][image5] ![alt text][image6] ![alt text][image7] ![alt text][image8] ![alt text][image9] ![alt text][image10]
  
 The images needed to be cropped and downsized for the neural network to be able to process them. After these steps, the images looked like this:
 
 ![alt text][image11]
 
+The two stop signs with different features were chosen. One of the stop signs is shown considerably distored, the other one has an additional sticker on it, introducing new (wrong) information compared to the previously trained images. It turned out, that the algorithm was not able to detect the challenging stop signs. For the stop sign with the sticker on it, the neural network did not even propose a stop sign within the top 5 candidates! 
+
+The next images were three different speed signs. 
+
+* The 30km/h sign had an additional traffic sign mounted below itself. The additional sign might fool the classifier, because it introduces a new color and shape below the traffic sign of interest. However, this sign was detected just fine.
+* A 60km/h sign was chosen as a very simple candidate with a clear picture and photographed from in front. Surprisingly, the algorithm did not detect this one!
+* 80km/h sign was cropped in such a way, that the image was almost filled by the traffic sign. It was clearly detected, probably, because there were still borders of 2 pixels or more around the traffic sign. During the first 5x5 convolution, there is enough information left to detect the traffic sign adequately. 
+
+As a last image, a yield sign was chosen. The yield sign was damaged in the top left corner and I thought this could fool the traffic sign classifier because the shape of the sign was changed. The opposite was the case: 1.00 prediction for a yield sign, therefore perfect match. 
+
+
+
 ### 2. Overall prediction quality of further traffic signs
 *Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).*
 
-The overall results were surprisingly bad! The model was able to correctly guess only 3 of the 7 traffic signs, which gives an accuracy of only 43%.
+The overall results were surprisingly bad! The model was able to correctly guess only 3 of the 6 traffic signs, which gives an accuracy of 50%.
 
-What was possibly going on is explained in more detail in the next section.
 
 ### 3. Prediction for individual traffic signs (optional)
 *Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)*
 
-I picked several images from the internet, where I believed they would pose some sort of challenge to the neural network. 
-
-The two stop signs I believed were a little more challenging to detect. One of the stop signs is shown considerably distored, the other one has an additional sticker on it. It turned out, that the algorithm was not able to detect the stop signs. For the stop sign with the sticker on it, the neural network did not even propose a stop sign within the top 5 candidates! 
-
-The next images were three different speed signs. 
-
-* The 30km/h sign had an additional traffic sign mounted below itself, which might be a little challenging. However, this sign was detected just fine.
-* A 60km/h sign was chosen as a very simple candidate with a clear picture and photographed from in front. Surprisingly, the algorithm did not detect this one!
-* 80km/h sign was cropped in such a way, that the image was almost filled by the traffic sign. It was clearly detected, probably, because there were still borders of 2 pixels or more around the traffic sign. During the first 5x5 convolution, there is enough information left to detect the traffic sign adequately. 
-
-As a last image, a yield sign was chosen. The yield sign was damaged in the top left corner and I thought this could fool the traffic sign classifier. The opposite was the case: 1.00 prediction for a yield sign, therefore perfect match. 
 
 Below, the results are summarized in a table. Overall, a matching rate of 50% could be achieved. 
 
@@ -230,6 +228,8 @@ Below, the results are summarized in a table. Overall, a matching rate of 50% co
 | 60 km/h				| No challenge: clearly visible	 |	0.00			| Not detected at all, although clearly visible and not too large!          |
 | 80 km/h				| Speed sign (forest) 			 |	0.83			| Clearly detected. 														|
 | Yield					| Yield sign (damaged) 			 |	1.00			| Clearly detected.															|
+
+I visualized the top 5 candidates which were picked by the traffic sign classifier. It was especially surprising, that a yield sign was proposed instead of stop signs for the first two samples! 
 
 ![alt text][image13]
 
