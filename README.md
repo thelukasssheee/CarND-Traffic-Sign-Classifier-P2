@@ -154,7 +154,9 @@ To train the model, I started off playing around with hyper parameters. I found 
 | Epochs					| 30											|
 | Batch size				| 128
 
-During the optimization, I also stayed with the AdamOptimizer since it was doing great with the dropouts I implemented. 
+I tried both increasing and decreasing the learning rate. A learning rate around 0.0007 was improving accuracy for an earlier version of the model. For the final network, this was not the case anymore - it was only leading to over fitting. A 50% higher learning rate was leading to strong first steps, but the overall accuracy reached in the end was not as good as for 0.001. 
+
+In order to find the optimal amount of epochs, the model was trained for 30, 50, 100, 200 epochs. For everything beyond 30, all the training effort was again going to an over fit, therefore only increasing computation time but not the accuracy. A smaller amount of epochs was also not suitable: the model did yet converge, which could be clearly seen from the Jupyter console. 
 
 ### 4. Necessary steps to achieve required accuracy of >0.93
 *Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.* 
